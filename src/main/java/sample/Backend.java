@@ -12,11 +12,39 @@ public class Backend {
 
         //convertMovietoJPG("/home/anton/Downloads/tutorial.mp4", "/home/anton/Downloads/images", "jpg", 0);
 
-        otherCopyPastedThing();
+        //otherCopyPastedThing();
+
+        customizedCopyPastedThing();
     }
 
 
-    public static void customizedCopyPastedThing(){
+    public static void customizedCopyPastedThing() throws IOException {
+
+        String input = "/home/anton/Downloads/tutorial.mp4";
+        String output = "/home/anton/Downloads/images";
+
+        InputStream inputStream = new FileInputStream(input);
+        Java2DFrameConverter bimConverter = new Java2DFrameConverter();
+
+        FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(inputStream);
+
+        frameGrabber.start();
+        Frame frame;
+
+        double frameRate = frameGrabber.getFrameRate();
+        int nFrames = frameGrabber.getLengthInFrames();
+        System.out.println("Video has " + nFrames + " frames and has frame rate of " + frameRate);
+
+        for (int i = 1; i < nFrames; i++) {
+            frameGrabber.setFrameNumber(i);
+            frame = frameGrabber.grabKeyFrame();
+
+            BufferedImage bi = bimConverter.convert(frame);
+            String path = output + File.separator + i + ".jpg";
+            ImageIO.write(bi, "png", new File(path));
+            frameGrabber.stop();
+            frameGrabber.close();
+        }
 
     }
 
