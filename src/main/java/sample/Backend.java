@@ -35,13 +35,20 @@ public class Backend {
         int nFrames = frameGrabber.getLengthInFrames();
         System.out.println("Video has " + nFrames + " frames and has frame rate of " + frameRate);
 
+        //Set baseImage to first frame
+        frameGrabber.setFrameNumber(0);
+        frame = frameGrabber.grabKeyFrame();
+        BufferedImage baseImage = bimConverter.convert(frame);
+
         for (int i = 0; i < nFrames; i++) {
+
+            //Set currentImage to i:th image
             frameGrabber.setFrameNumber(i);
             frame = frameGrabber.grabKeyFrame();
+            BufferedImage currentImage = bimConverter.convert(frame);
 
-            BufferedImage bi = bimConverter.convert(frame);
             String path = output + File.separator + i + ".jpg";
-            ImageIO.write(bi, "png", new File(path));
+            ImageIO.write(currentImage, "png", new File(path));
 
             System.out.println("Done with frame: " + i);
         }
