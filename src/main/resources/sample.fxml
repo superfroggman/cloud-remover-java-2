@@ -4,12 +4,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Text?>
-<GridPane fx:controller="sample.Controller"
+<?import javafx.scene.image.ImageView?>
+<GridPane fx:id="primary" fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <Label fx:id="title" text="Cloud Remover" GridPane.columnIndex="0" GridPane.rowIndex="0"
-           GridPane.columnSpan="1"/>
-    <Button onAction="#buttonClicked" text="Choose file..." GridPane.columnIndex="0" GridPane.rowIndex="1"
-            GridPane.columnSpan="1"/>
-    <Label fx:id="selectedfile" GridPane.columnIndex="0" GridPane.rowIndex="2"
-           GridPane.columnSpan="1"/>
+    <GridPane fx:id="startscene">
+        <Label fx:id="title" text="Cloud Remover" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="1"/>
+        <Button fx:id="choosebutton" onAction="#buttonClicked" text="Choose file..." GridPane.columnIndex="0" GridPane.rowIndex="1"
+                GridPane.columnSpan="1"/>
+        <Label fx:id="selectedfile" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               GridPane.columnSpan="1"/>
+        <Button onAction="#runButtonClicked" text="Run" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                GridPane.columnSpan="1"/>
+    </GridPane>
+    <GridPane fx:id="running">
+        <ImageView fx:id="currently" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                   GridPane.columnSpan="1"/>
+        <Label fx:id="percentagerunning" text="2000" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="1"/>
+        <Button onAction="#temp"/>
+    </GridPane>
+    <GridPane fx:id="save">
+        <Label text="Finished!" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               GridPane.columnSpan="1"/>
+        <ImageView fx:id="finishview" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                   GridPane.columnSpan="1"/>
+        <Label text="Thanks for using Cloud Remover!" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               GridPane.columnSpan="1"/>
+        <Button onAction="#saveButtonClicked" text="Save File" GridPane.columnIndex="0" GridPane.rowIndex="6"
+                GridPane.columnSpan="1"/>
+    </GridPane>
+
+
 </GridPane>

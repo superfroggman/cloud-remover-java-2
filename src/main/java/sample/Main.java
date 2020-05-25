@@ -14,16 +14,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
-<<<<<<< Updated upstream
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-=======
         primaryStage.setTitle("Cloud Remover");
-        primaryStage.setScene(new Scene(root, 500, 375));
+        primaryStage.setScene(new Scene(root, 920, 600));
         primaryStage.show();
+
         //Backend.customizedCopyPastedThing();
->>>>>>> Stashed changes
     }
 
 
