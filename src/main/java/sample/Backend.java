@@ -23,17 +23,20 @@ public class Backend {
     public static void customizedCopyPastedThing() throws IOException {
 
         //set temp inputs and outputs
-        String input = "/home/anton/Downloads/mackan.mp4";
+        String input = "/home/anton/Downloads/ex.gif";
         String output = "/home/anton/Downloads/images";
 
         //start things
         InputStream inputStream = new FileInputStream(input);
         Java2DFrameConverter bimConverter = new Java2DFrameConverter();
+        Java2DFrameConverter bimConverter2 = new Java2DFrameConverter();
 
         //initialize frame grabbers
         FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(inputStream);
         frameGrabber.start();
         Frame frame;
+
+        Frame frame2;
 
         double frameRate = frameGrabber.getFrameRate();
         int nFrames = frameGrabber.getLengthInFrames();
@@ -44,18 +47,23 @@ public class Backend {
         frame = frameGrabber.grabKeyFrame();
         BufferedImage baseImage = bimConverter.convert(frame);
 
+
         int width = baseImage.getWidth();
         int height = baseImage.getHeight();
 
         //Loop through all frames
-        for (int i = 1; i < nFrames - 1; i++) {
+        for (int i = 1; i < nFrames; i++) {
+
+            int changed = 0;
+            int notChanged = 0;
 
             System.out.println("Starting frame: " + i);
 
             //Set currentImage to i:th image
             frameGrabber.setFrameNumber(i);
-            frame = frameGrabber.grabKeyFrame();
-            BufferedImage currentImage = bimConverter.convert(frame);
+            frame2 = frameGrabber.grabKeyFrame();
+            BufferedImage currentImage = bimConverter2.convert(frame2);
+
 
             for (int w = 0; w < width; w++) {
 
@@ -64,27 +72,31 @@ public class Backend {
                     Color baseColor = new Color(baseImage.getRGB(w, h));
                     int baseBrightness = baseColor.getRed() + baseColor.getGreen() + baseColor.getBlue();
 
+
                     int currentValue = currentImage.getRGB(w, h);
                     Color currentColor = new Color(currentValue);
                     int currentBrightness = currentColor.getRed() + currentColor.getGreen() + currentColor.getBlue();
 
-                    if (currentBrightness > baseBrightness) {
+                    //System.out.println("base: " + baseBrightness + "current: " + currentBrightness);
+
+                    if (currentBrightness < baseBrightness) {
                         baseImage.setRGB(w, h, currentValue);
                         //System.out.println("Changed things");
+                        changed++;
                     } else {
                         //System.out.println("Didn't change things");
+                        notChanged++;
                     }
 
-                    //baseImage.setRGB(w,h,);
-                    //System.out.println("Current image: " + currentImage.getRGB(w, h));
                 }
             }
 
             System.out.println("Done with frame: " + i);
+            System.out.println("Changed: " + changed + "and didn't change: " + notChanged);
         }
 
         //Save image
-        String path = output + File.separator + "output" + ".jpg";
+        String path = output + File.separator + "output" + ".png";
         ImageIO.write(baseImage, "png", new File(path));
 
         //Close frameGrabber because that's probably good
