@@ -23,7 +23,7 @@ public class Backend {
     public static void customizedCopyPastedThing() throws IOException, InterruptedException {
 
         //set temp inputs and outputs
-        String input = "/home/anton/Downloads/ex.gif";
+        String input = "/home/anton/Downloads/car.mp4";
         String output = "/home/anton/Downloads/images";
 
         //start things
@@ -62,10 +62,11 @@ public class Backend {
             //Set currentImage to i:th image
             frameGrabber.setFrameNumber(i);
 
+
             System.out.println("should be: "+i+" is: "+ frameGrabber.getFrameNumber());
 
 
-            frame2 = frameGrabber.grabKeyFrame();
+            frame2 = frameGrabber.grabImage();
             System.out.println("frame2thing: " + frame2);
             BufferedImage currentImage = bimConverter2.convert(frame2);
 
