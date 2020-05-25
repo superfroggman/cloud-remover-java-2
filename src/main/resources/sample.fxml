@@ -21,15 +21,16 @@
         <ImageView fx:id="currently" GridPane.columnIndex="0" GridPane.rowIndex="2"
                    GridPane.columnSpan="1"/>
         <Label fx:id="percentagerunning" text="2000" GridPane.columnIndex="0" GridPane.rowIndex="0"
-               GridPane.columnSpan="1"/>
-        <Button onAction="#temp"/>
+               GridPane.columnSpan="1" />
+        <Button onAction="#temp" text="tempdone" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                GridPane.columnSpan="1"/>
     </GridPane>
     <GridPane fx:id="save">
-        <Label text="Finished!" GridPane.columnIndex="0" GridPane.rowIndex="1"
+        <Label fx:id="done" text="Finished!" GridPane.columnIndex="0" GridPane.rowIndex="1"
                GridPane.columnSpan="1"/>
         <ImageView fx:id="finishview" GridPane.columnIndex="0" GridPane.rowIndex="3"
                    GridPane.columnSpan="1"/>
-        <Label text="Thanks for using Cloud Remover!" GridPane.columnIndex="0" GridPane.rowIndex="5"
+        <Label fx:id="thx" text="Thanks for using Cloud Remover!" GridPane.columnIndex="0" GridPane.rowIndex="5"
                GridPane.columnSpan="1"/>
         <Button onAction="#saveButtonClicked" text="Save File" GridPane.columnIndex="0" GridPane.rowIndex="6"
                 GridPane.columnSpan="1"/>

@@ -29,7 +29,11 @@ public class Controller {
     @FXML
     Label title;
     @FXML
+    Label done;
+    @FXML
     Label percentagerunning;
+    @FXML
+    Label thx;
     @FXML
     GridPane primary;
     @FXML
@@ -49,7 +53,10 @@ public class Controller {
      * Sets the color and font, also hides to scenes not in use.
      */
     public void initialize() {
-        title.setFont(Font.font("Sans-Serif", 35));
+        title.setFont(Font.font("Sans-Serif", 30));
+        done.setFont(Font.font("Sans-Serif", 35));
+        thx.setFont(Font.font("Sans-Serif", 20));
+        percentagerunning.setFont(Font.font("Sans-Serif", 20));
         primary.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         save.setVisible(false);
         running.setVisible(false);
