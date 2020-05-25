@@ -62,6 +62,8 @@ public class Backend {
         frameGrabber.close();
     }
 
+    //ignore things below this
+
     //actually works!!!
     public static void otherCopyPastedThing() throws FrameGrabber.Exception, FileNotFoundException {
         InputStream inputStream = new FileInputStream("/home/anton/Downloads/tutorial.mp4");
