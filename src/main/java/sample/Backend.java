@@ -20,14 +20,16 @@ public class Backend {
 
     public static void customizedCopyPastedThing() throws IOException {
 
+        //set temp inputs and outputs
         String input = "/home/anton/Downloads/tutorial.mp4";
         String output = "/home/anton/Downloads/images";
 
+        //start things
         InputStream inputStream = new FileInputStream(input);
         Java2DFrameConverter bimConverter = new Java2DFrameConverter();
 
+        //initialize frame grabbers
         FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(inputStream);
-
         frameGrabber.start();
         Frame frame;
 
@@ -40,6 +42,7 @@ public class Backend {
         frame = frameGrabber.grabKeyFrame();
         BufferedImage baseImage = bimConverter.convert(frame);
 
+        //Loop through all frames
         for (int i = 0; i < nFrames; i++) {
 
             //Set currentImage to i:th image
@@ -47,12 +50,14 @@ public class Backend {
             frame = frameGrabber.grabKeyFrame();
             BufferedImage currentImage = bimConverter.convert(frame);
 
+            //Save image
             String path = output + File.separator + i + ".jpg";
             ImageIO.write(currentImage, "png", new File(path));
 
             System.out.println("Done with frame: " + i);
         }
 
+        //Close frameGrabber because that's probably good
         frameGrabber.stop();
         frameGrabber.close();
     }
