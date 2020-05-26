@@ -7,10 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -19,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.zip.GZIPInputStream;
 
 public class Controller {
     public static Stage primaryStage;
@@ -53,7 +51,7 @@ public class Controller {
      * Sets the color and font, also hides to scenes not in use.
      */
     public void initialize() {
-        title.setFont(Font.font("Sans-Serif", 30));
+        title.setFont(Font.font("Sans-Serif", 60));
         done.setFont(Font.font("Sans-Serif", 35));
         thx.setFont(Font.font("Sans-Serif", 20));
         percentagerunning.setFont(Font.font("Sans-Serif", 20));
@@ -90,8 +88,6 @@ public class Controller {
             percentagerunning.setText("29,7363% finished!");
             currently.setImage(new Image("/pic.png"));
             currently.setVisible(true);
-            currently.setFitWidth(200);
-            currently.setFitHeight(175);
             startscene.setVisible(false);
             running.setVisible(true);
 
@@ -104,7 +100,7 @@ public class Controller {
         running.setVisible(false);
         save.setVisible(true);
         finishview.setImage(new Image("/pic.png"));
-        currently.setFitWidth(200);
-        currently.setFitHeight(175);
+        finishview.setFitWidth(800);
+        finishview.setFitHeight(450);
     }
 }
