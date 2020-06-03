@@ -12,11 +12,9 @@ public class Backend {
 
     public static void ffmpegTest() throws Exception {
 
-        //convertMovietoJPG("/home/anton/Downloads/tutorial.mp4", "/home/anton/Downloads/images", "jpg", 0);
+        //customizedCopyPastedThing();
 
-        //otherCopyPastedThing();
-
-        customizedCopyPastedThing();
+        convertMovietoJPG("/home/anton/Downloads/car.mp4", "/home/anton/Downloads/images", "jpg", 1);
     }
 
 
@@ -63,7 +61,7 @@ public class Backend {
             frameGrabber.setFrameNumber(i);
 
 
-            System.out.println("should be: "+i+" is: "+ frameGrabber.getFrameNumber());
+            System.out.println("should be: " + i + " is: " + frameGrabber.getFrameNumber());
 
 
             frame2 = frameGrabber.grabImage();
@@ -79,7 +77,7 @@ public class Backend {
                     int baseBrightness = baseColor.getRed() + baseColor.getGreen() + baseColor.getBlue();
 
                     //System.out.println("current img!: " + currentImage);
-                    if(currentImage == null){
+                    if (currentImage == null) {
                         System.out.println("NULL!!!!!, SKIPPING!!!!");
                         //continue coolio;
                     }
@@ -104,7 +102,7 @@ public class Backend {
             System.out.println("Done with frame: " + i);
             System.out.println("Changed: " + changed + "and didn't change: " + notChanged);
 
-            float percent = 100 * (float)i / (float)nFrames;
+            float percent = 100 * (float) i / (float) nFrames;
             System.out.println(percent + "% finished\n");
         }
 
@@ -115,5 +113,29 @@ public class Backend {
         //Close frameGrabber because that's probably good
         frameGrabber.stop();
         frameGrabber.close();
+    }
+
+    public static void convertMovietoJPG(String mp4Path, String imagePath, String imgType, int frameJump) throws Exception, IOException {
+        Java2DFrameConverter converter = new Java2DFrameConverter();
+        FFmpegFrameGrabber frameGrabber = new FFmpegFrameGrabber(mp4Path);
+        frameGrabber.start();
+        Frame frame;
+        double frameRate = frameGrabber.getFrameRate();
+        int imgNum = 0;
+        System.out.println("Video has " + frameGrabber.getLengthInFrames() + " frames and has frame rate of " + frameRate);
+        try {
+            for (int ii = 1; ii <= frameGrabber.getLengthInFrames(); ii++) {
+                imgNum++;
+                frameGrabber.setFrameNumber(ii);
+                frame = frameGrabber.grab();
+                BufferedImage bi = converter.convert(frame);
+                String path = imagePath + File.separator + imgNum + ".jpg";
+                ImageIO.write(bi, imgType, new File(path));
+                ii += frameJump;
+            }
+            frameGrabber.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
